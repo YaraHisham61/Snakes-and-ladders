@@ -41,10 +41,9 @@ bool Grid::overlapping(GameObject* pNewObject)
 {
 	for (int i = NumVerticalCells - 1; i >= 0; i--) // to allocate cells from bottom up
 	{
-		
 			for (int j = 0; j < NumHorizontalCells; j++) // to allocate cells from left to right
 			{
-				if (CellList[i][j]->GetGameObject())
+				if (CellList[i][j]->GetGameObject())// to check if the cell contains an object 
 				{
 					GameObject* pObject = CellList[i][j]->GetGameObject();
 					if (dynamic_cast<Ladder*>(pNewObject) && dynamic_cast<Ladder*>(pObject))//check if the 2 objects are ladders
@@ -156,6 +155,12 @@ void Grid::AdvanceCurrentPlayer()
 Player * Grid::GetCurrentPlayer() const
 {
 	return PlayerList[currPlayerNumber];
+}
+
+void Grid::SetCurrentplayer(int currentplayernum)
+{
+	if (currentplayernum <= 0 && currentplayernum < 3)
+		currPlayerNumber = currentplayernum;
 }
 
 Ladder * Grid::GetNextLadder(const CellPosition & position)
@@ -289,9 +294,9 @@ bool Grid::getcellobject(CellPosition cposition)
 		return true;
 	else
 	{
-		for (int i =NumHorizontalCells; i >= 0; i--) // searching from position.vCell and ABOVE
+		for (int i =NumHorizontalCells; i >= 0; i--) // to search the cells from right to left
 		{
-			if (cposition.HCell() == i)
+			if (cposition.HCell() == i)// to get the cells in the same column as cposition(calling parameter)
 			{
 				for (int j = 0; j < NumVerticalCells; j++) // searching from startH and RIGHT
 				{
@@ -301,7 +306,7 @@ bool Grid::getcellobject(CellPosition cposition)
 						if ( CellList[j][i]->HasLadder()!=NULL)
 						{
 							Ladder* oldladder = CellList[j][i]->HasLadder();
-							if (oldladder->GetEndPosition().VCell() == cposition.VCell())
+							if (oldladder->GetEndPosition().VCell() == cposition.VCell()) //comparing the end cell of the object with the parameter
 								return true;
 						}
 
@@ -311,7 +316,7 @@ bool Grid::getcellobject(CellPosition cposition)
 						if ( CellList[j][i]->HasSnake() != NULL)
 						{
 							Snake* oldsnake = CellList[j][i]->HasSnake();
-							if (oldsnake->GetEndPosition().VCell() == cposition.VCell())
+							if (oldsnake->GetEndPosition().VCell() == cposition.VCell())//comparing the end cell of the object with the parameter
 								return true;
 						}
 
@@ -320,6 +325,8 @@ bool Grid::getcellobject(CellPosition cposition)
 			} 
 		}
 	}
+	/*the function check if the parameter cellposition has a previous object(ladder, snake, or card) 
+	or end cell of a ladder or snake*/
 	return false;
 }
 bool Grid::getcellsnakeorladder(CellPosition cposition)
@@ -332,6 +339,7 @@ bool Grid::getcellsnakeorladder(CellPosition cposition)
 	if (CellList[v][h]->HasSnake())
 		return true;
 	return false;
+	/*to check if the caller parameter cellposition has a start cell of other snake or ladder*/
 }
 Grid::~Grid()
 {
