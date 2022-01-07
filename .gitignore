@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+PT-Project.sln
+PT-Project.sdf
+PT-Project.v11.suo
+PT-Project.vcxproj
+PT-Project.vcxproj.filters
+PT-Project.vcxproj.user
+Debug
+
+.vs
