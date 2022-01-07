@@ -35,6 +35,12 @@ int Player::GetWallet() const
 	return wallet;
 }
 
+void Player::SetturnCount(int count)
+{
+	if (count >= 0 &&count < 3)
+		turnCount = count;
+}
+
 int Player::GetTurnCount() const
 {
 	return turnCount;
