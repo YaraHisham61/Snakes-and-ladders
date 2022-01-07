@@ -10,6 +10,20 @@ int CardTen::cardprice = 0;
 bool CardTen::counter = true;
 Player* CardTen::Pplayer1 = NULL;
 
+int CardTen::getcardprice()
+{
+	return cardprice;
+}
+
+void CardTen::setowner(Player* player)
+{
+	Pplayer1 = player;
+}
+
+Player* CardTen::getowner()
+{
+	return Pplayer1;
+}
 void CardTen::ReadCardParameters(Grid* pGrid)
 {
 	if (getpriceandfees(cardprice, fees, cardNumber, counter, pGrid) && counter)
