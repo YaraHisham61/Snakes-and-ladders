@@ -28,7 +28,7 @@ public:
 
 	void SetWallet(int wallet);		// A setter for the wallet
 	int GetWallet() const;			// a getter for the wallet
-
+	void SetturnCount(int count);
 	int GetTurnCount() const; // A getter for the turnCount
 	bool getgame();
 	void setgame(bool a);
