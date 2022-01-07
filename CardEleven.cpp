@@ -11,6 +11,21 @@ int CardEleven::cardprice = 0;
 bool CardEleven::counter = true;
 Player* CardEleven::Pplayer1 = NULL;
 
+
+int CardEleven::getcardprice()
+{
+	return cardprice;
+}
+
+void CardEleven::setowner(Player* player)
+{
+	Pplayer1 = player;
+}
+
+Player* CardEleven::getowner()
+{
+	return Pplayer1;
+}
 void CardEleven::ReadCardParameters(Grid* pGrid)
 {
 	if (getpriceandfees(cardprice, fees, cardNumber, counter, pGrid) && counter)
