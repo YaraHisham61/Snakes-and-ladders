@@ -112,7 +112,7 @@ void Player::Move(Grid* pGrid, int diceNumber)
 	int x = player->getgame();
 	if (x > 0)
 	{
-		setgame(x--);
+		--game;
 		return;
 	}
 	justRolledDiceNum = diceNumber;
