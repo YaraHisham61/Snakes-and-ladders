@@ -2,8 +2,7 @@
 
 CardEleven::CardEleven(const CellPosition& pos) : Card(pos)
 {
-	counter = 0;
-	cardNumber = 9;
+	cardNumber = 11;
 
 }
 int CardEleven::fees = 0;
