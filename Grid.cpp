@@ -192,8 +192,40 @@ Ladder * Grid::GetNextLadder(const CellPosition & position)
 	return NULL; // not found
 }
 
+Player* Grid::GetLeastWallet() const
+{
+	Player* LeastWallet = PlayerList[0];
+	for (int i = 0;i < MaxPlayerCount;i++)
+	{
+		if (LeastWallet->GetWallet() > PlayerList[i]->GetWallet())
+		{
+			LeastWallet = PlayerList[i];
+		}
+	}
+	return LeastWallet;
+}
 
 // ========= User Interface Functions =========
+
+Player* Grid::GetNextPlayer(Player* CurrentPlayer)
+{
+	Player* NextPlayer = NULL;
+	int SmallestDis = NumHorizontalCells * NumVerticalCells;
+	for (int i = 0;i < MaxPlayerCount;i++)
+	{
+		if (PlayerList[i] == CurrentPlayer)
+		{
+			continue;
+		}
+		if (PlayerList[i]->GetStepCount() > CurrentPlayer->GetStepCount() && (PlayerList[i]->GetStepCount() - CurrentPlayer->GetStepCount()) <= SmallestDis)
+		{
+			NextPlayer = PlayerList[i];
+			SmallestDis = PlayerList[i]->GetStepCount() - CurrentPlayer->GetStepCount();
+		}
+	}
+
+	return NextPlayer;
+}
 
 
 void Grid::UpdateInterface() const
@@ -327,7 +359,7 @@ void Grid::LoadAll(ifstream& infile, int type, string file)
 			CellPosition cardPosition = CellPosition::GetCellPositionFromNum(13);
 			switch (cardNum)
 			{
-			/*case 1:
+			case 1:
 				pCard = new CardOne(cardPosition);
 				break;
 
@@ -351,7 +383,7 @@ void Grid::LoadAll(ifstream& infile, int type, string file)
 				break;
 			case 8:
 				pCard = new CardEight(cardPosition);
-				*/break;
+				break;
 			case 9:
 				pCard = new CardNine(cardPosition);
 				break;
@@ -361,9 +393,9 @@ void Grid::LoadAll(ifstream& infile, int type, string file)
 			case 11:
 				pCard = new CardEleven(cardPosition);
 				break;
-			//case 12:
-			//	pCard = new CardTwelve(cardPosition);
-			//	break;
+			case 12:
+				pCard = new CardTwelve(cardPosition);
+				break;
 			
 			}
 			pCard->Load(infile, type, file);
