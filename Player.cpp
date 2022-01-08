@@ -8,7 +8,7 @@ Player::Player(Cell* pCell, int playerNum) : stepCount(0), wallet(100), playerNu
 	this->pCell = pCell;
 	this->turnCount = 0;
 	justRolledDiceNum = 0;
-	game = true;
+	game = 0;
 	// Make all the needed initialization or validations
 }
 
@@ -47,8 +47,7 @@ void Player::setturncount(int a)
 {
 	turnCount = a;
 }
-
-void Player::setgame(bool a)
+void Player::setgame(int a)
 {
 	game = a;
 }
@@ -58,7 +57,12 @@ int Player::getjustRolledDiceNum()
 	return justRolledDiceNum;
 }
 
-bool Player::getgame()
+int Player::GetStepCount() const
+{
+	return stepCount;
+}
+
+int Player::getgame()
 {
 	return game;
 }
@@ -105,9 +109,10 @@ void Player::Move(Grid* pGrid, int diceNumber)
 		return;
 	// 3- Set the justRolledDiceNum with the passed diceNumber
 	Player* player = pGrid->GetCurrentPlayer();
-	if (player->getgame() == false)
+	int x = player->getgame();
+	if (x > 0)
 	{
-		player->setgame(true);
+		setgame(x--);
 		return;
 	}
 	justRolledDiceNum = diceNumber;
