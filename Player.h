@@ -19,6 +19,7 @@ class Player
 	
 public:
 
+	
 	Player(Cell * pCell, int playerNum); // Constructor making any needed initializations
 
 	// ====== Setters and Getters ======
@@ -31,9 +32,10 @@ public:
 
 	int GetTurnCount() const; // A getter for the turnCount
 	void setturncount(int a);
-	bool getgame();
-	void setgame(bool a);
+	int getgame() const;
+	void setgame(int a);
 	int getjustRolledDiceNum();
+	int GetStepCount() const;
 	///TODO: You can add setters and getters for data members here (if needed)
 
 	// ====== Drawing Functions ======
