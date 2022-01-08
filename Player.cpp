@@ -62,7 +62,7 @@ int Player::GetStepCount() const
 	return stepCount;
 }
 
-int Player::getgame()
+int Player::getgame() const
 {
 	return game;
 }
